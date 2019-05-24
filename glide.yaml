@@ -1,0 +1,16 @@
+package: go-credital
+import:
+- package: github.com/labstack/echo
+  version: ~3.1
+- package: github.com/tkanos/gonfig
+  version: ^1.0.0
+- package: gopkg.in/mgo.v2
+- package: github.com/labstack/gommon
+  version: ^0.2.8
+  subpackages:
+  - color
+- package: github.com/dgrijalva/jwt-go
+  version: ^3.2.0
+- package: golang.org/x/net
+  subpackages:
+  - context
