@@ -1,8 +1,14 @@
-hash: ea5512d04750b102b2dc4abf0b85872f1380f9c18513bde0067dc7b00eeceaaf
-updated: 2019-05-23T05:56:14.388482+07:00
+hash: 5c46ad781670c28841dcfc35f3ab485116b770253b8f2bb6238607b6a31b5a8f
+updated: 2019-05-24T15:16:01.858271196+07:00
 imports:
 - name: github.com/dgrijalva/jwt-go
   version: 06ea1031745cb8b3dab3f6a236daf2b0aa468b7e
+- name: github.com/gorilla/context
+  version: 08b5f424b9271eedf6f9f0ce86cb9396ed337a42
+- name: github.com/gorilla/securecookie
+  version: e65cf8c5df817c89aeb47ecb46064e802e2de943
+- name: github.com/gorilla/sessions
+  version: f57b7e2d29c6211d16ffa52a0998272f75799030
 - name: github.com/labstack/echo
   version: 4256489c0e1ff50bdb71aedd1a21483fe2d67607
 - name: github.com/labstack/gommon
