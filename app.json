@@ -1,0 +1,5 @@
+{
+    "MongoHost": "localhost",
+    "MongoDBName": "panel",
+    "Port": ":9000"
+}

@@ -1,5 +1,5 @@
-hash: 5c46ad781670c28841dcfc35f3ab485116b770253b8f2bb6238607b6a31b5a8f
-updated: 2019-05-24T15:16:01.858271196+07:00
+hash: 40aa0baf5c2ec57ea76fb026b9f0d42424fc6ef4183bf4931c99bd67748bb6af
+updated: 2019-05-25T11:41:27.046612+07:00
 imports:
 - name: github.com/dgrijalva/jwt-go
   version: 06ea1031745cb8b3dab3f6a236daf2b0aa468b7e
@@ -11,11 +11,19 @@ imports:
   version: f57b7e2d29c6211d16ffa52a0998272f75799030
 - name: github.com/labstack/echo
   version: 4256489c0e1ff50bdb71aedd1a21483fe2d67607
+  subpackages:
+  - middleware
+- name: github.com/labstack/echo-contrib
+  version: 7d9d9632a4aadf9b026436e43d5f96eca2d895a6
+  subpackages:
+  - session
 - name: github.com/labstack/gommon
   version: 7fd9f68ece0bcb1a905fac8f1549f0083f71c51b
   subpackages:
+  - bytes
   - color
   - log
+  - random
 - name: github.com/mattn/go-colorable
   version: 3a70a971f94a22f2fa562ffcc7a0eb45f5daf045
 - name: github.com/mattn/go-isatty
@@ -49,4 +57,9 @@ imports:
   - unicode/norm
 - name: gopkg.in/mgo.v2
   version: 9856a29383ce1c59f308dd1cf0363a79b5bef6b5
+  subpackages:
+  - bson
+  - internal/json
+  - internal/sasl
+  - internal/scram
 testImports: []
