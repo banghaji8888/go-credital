@@ -1,7 +1,7 @@
 package utils
 
 import (
-	"go-credital/models/mongo"
+	"go-credital/models"
 
 	"github.com/gorilla/sessions"
 	"github.com/labstack/echo"
@@ -11,7 +11,7 @@ import (
 var sessionID = "credital-sessions"
 
 // SetSession - set sessions
-func SetSession(c echo.Context, key string, user mongo.SysUser) {
+func SetSession(c echo.Context, key string, user models.SysUser) {
 	sess, _ := session.Get(sessionID, c)
 	sess.Values[key] = user
 	sess.Save(c.Request(), c.Response())

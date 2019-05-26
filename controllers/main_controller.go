@@ -1,8 +1,8 @@
 package controllers
 
 import (
-	mo "go-credital/db/mongo"
-	"go-credital/models/mongo"
+	"go-credital/db"
+	"go-credital/models"
 	"go-credital/utils"
 	"log"
 	"net/http"
@@ -23,8 +23,8 @@ func Login(c echo.Context) error {
 	// 	Group:    "lawak",
 	// }
 
-	// sess := mo.GetConnection()
-	// panelRepo := mo.InitMongoRepo(sess, "sys_user")
+	// sess := db.GetConnection()
+	// panelRepo := db.InitMongoRepo(sess, "sys_user")
 	// t := M{
 	// 	"name": "youngky",
 	// }
@@ -51,14 +51,14 @@ func DoLogin(c echo.Context) error {
 	username := c.FormValue("username")
 	password := c.FormValue("password")
 
-	model := mongo.SysUser{}
-	pannelRepo := mo.InitMongoRepo("sys_user")
+	model := models.SysUser{}
+	pannelRepo := db.InitMongoRepo("sys_user")
 
 	params := bson.M{
 		"username": username,
 	}
 
-	sysUserBson, _ := pannelRepo.FindOne(params, &model)
+	sysUserBson, _ := pannelRepo.FindOne(params, model)
 
 	data := M{
 		"error":    "Username dan Password tidak sama",
@@ -82,10 +82,12 @@ func DoLogin(c echo.Context) error {
 
 // Dashboard - dashboard controller
 func Dashboard(c echo.Context) error {
+	menu := utils.GetMenu()
+
 	sess := utils.GetSession(c)
-	user := sess.Values["user"].(mongo.SysUser)
+	user := sess.Values["user"].(models.SysUser)
 	log.Println(user.Name)
-	data := M{"message": "Hello World!"}
+	data := M{"menu": menu, "title": "hore"}
 	return c.Render(http.StatusOK, "dashboard", data)
 }
 

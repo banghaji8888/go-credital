@@ -1,9 +1,10 @@
-package mongo
+package db
 
 import (
 	"go-credital/config"
 
 	"gopkg.in/mgo.v2"
+	"gopkg.in/mgo.v2/bson"
 )
 
 // MongoRepo - interface repo
@@ -12,7 +13,8 @@ type MongoRepo interface {
 	Update(interface{}) error
 	Delete(interface{}) error
 	FindOne(interface{}, interface{}) (interface{}, error)
-	FindMany(interface{}, []interface{}) ([]interface{}, error)
+	FindMany(interface{}) ([]bson.M, error)
+	FindMenu(interface{}) ([]bson.M, error)
 }
 
 type mongoRepo struct {
@@ -69,11 +71,28 @@ func (r *mongoRepo) FindOne(data interface{}, out interface{}) (interface{}, err
 	return out, nil
 }
 
-func (r *mongoRepo) FindMany(data interface{}, out []interface{}) ([]interface{}, error) {
+func (r *mongoRepo) FindMany(data interface{}) ([]bson.M, error) {
 	sessionCopy := r.session.Copy()
 	defer sessionCopy.Close()
 
+	var out []bson.M
+
 	err := sessionCopy.DB(r.dbname).C(r.collection).Find(data).All(&out)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return out, nil
+}
+
+func (r *mongoRepo) FindMenu(data interface{}) ([]bson.M, error) {
+	sessionCopy := r.session.Copy()
+	defer sessionCopy.Close()
+
+	var out []bson.M
+
+	err := sessionCopy.DB(r.dbname).C(r.collection).Find(data).Sort("parent", "urutan").All(&out)
 
 	if err != nil {
 		return nil, err

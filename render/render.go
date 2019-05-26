@@ -9,6 +9,7 @@ import (
 	"text/template"
 
 	"github.com/labstack/echo"
+	"gopkg.in/mgo.v2/bson"
 )
 
 type renderer struct {
@@ -27,12 +28,21 @@ func NewRenderer(location string, debug bool) *renderer {
 	return tpl
 }
 
+func isHasChildren(data bson.M) int {
+	result := 0
+	if _, ok := data["child"]; ok {
+		result = 1
+	}
+
+	return result
+}
+
 func (t *renderer) ReloadTemplates() {
 	//t.template = template.Must(template.ParseGlob(t.location))
 	newTpl := template.New("")
 	err := filepath.Walk(t.location, func(path string, info os.FileInfo, err error) error {
 		if strings.Contains(path, ".html") {
-			_, err = newTpl.ParseFiles(path)
+			_, err = newTpl.Funcs(template.FuncMap{"isHasChildren": isHasChildren}).ParseFiles(path)
 			if err != nil {
 				log.Println(err)
 			}

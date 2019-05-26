@@ -3,15 +3,17 @@ package main
 import (
 	"encoding/gob"
 	"go-credital/config"
-	"go-credital/db/mongo"
-	models "go-credital/models/mongo"
+	"go-credital/db"
+	"go-credital/models"
 	"go-credital/routes"
+	"go-credital/utils"
 	"log"
 )
 
 func main() {
 	config.Init()
-	mongo.InitMongo()
+	db.InitMongo()
+	utils.InitSettings()
 	gob.Register(models.SysUser{})
 
 	e := routes.Init()

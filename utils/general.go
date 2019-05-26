@@ -1,6 +1,9 @@
 package utils
 
 import (
+	"encoding/json"
+	"io"
+	"io/ioutil"
 	"reflect"
 )
 
@@ -23,4 +26,17 @@ func GetFieldsName(m interface{}) []string {
 	}
 
 	return fields
+}
+
+// ParsingFromBody parsing from body to map
+func ParsingFromBody(body io.ReadCloser) (bool, map[string]interface{}) {
+	isErr := false
+	b, _ := ioutil.ReadAll(body)
+	var res map[string]interface{}
+	err := json.Unmarshal(b, &res)
+	if err != nil {
+		isErr = true
+	}
+
+	return isErr, res
 }
